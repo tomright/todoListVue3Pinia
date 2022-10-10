@@ -1,27 +1,23 @@
 <template>
-  Тестовая страница
-  <pre v-for="item in todoStore.items">
-    {{item.id}} {{item.name}} {{item.done}}
-  </pre>
-  <!-- <pre>{{ todoStore.getItem }}</pre> -->
-  <input v-model="imputMessage" placeholder="Введите дело">
-  <button @click="addTodo">Записать дело</button>
+<h1>Test</h1>
+<TodoList></TodoList>  
 </template>
 <script>
 // import {useTodoStore} from '../stores/todo.js'
 import { useTodoStore } from "/src/stores/todo";
+import TodoList from './TodoList.vue';
 export default {
-  data() {
-    return {
-      todoStore: useTodoStore(),
-      imputMessage: '',
-    };
-  },
-  methods: {
-    addTodo() {
-      this.todoStore.addNewTodo({ id: 'none', name: this.imputMessage, done: false });
-    }
-  }
+    data() {
+        return {
+            imputMessage: "",
+        };
+    },
+    methods: {
+        addTodo() {
+            this.todoStore.addNewTodo({ id: "none", name: this.imputMessage, done: false });
+        }
+    },
+    components: { TodoList }
 };
 </script>
 <style></style>
