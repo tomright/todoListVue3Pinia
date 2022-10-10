@@ -11,7 +11,7 @@ export const useTodoStore = defineStore("todo", {
   },
   getters: {
     getItem(state) {
-      return state.items;
+      return state.items
     },
   },
   actions: {
