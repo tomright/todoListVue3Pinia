@@ -11,12 +11,16 @@ export const useTodoStore = defineStore("todo", {
   },
   getters: {
     getItem(state) {
-      return state.items
+      console.log(state);
+      return state.items;
     },
   },
   actions: {
     save() {
       console.log("TODO Saved");
+    },
+    addNewTodo(todos) {
+      this.items.push(todos);
     },
   },
 });
