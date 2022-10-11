@@ -20,7 +20,12 @@ export const useTodoStore = defineStore("todo", {
       console.log("TODO Saved");
     },
     addNewTodo() {
-      this.items.push({ id: undefined, name: "", done: false });
+      //добавлено автоматическая генерация на стороне клиента id для каждого нового задания.
+      this.items.push({
+        id: this.items.length + 1,
+        name: "",
+        done: false,
+      });
     },
     deleteItem(item) {
       console.log("deleteItem", item);
