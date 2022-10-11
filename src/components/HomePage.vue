@@ -1,5 +1,5 @@
 <template>
-<h1>Test</h1>
+<h1>Список дел</h1>
 <TodoList></TodoList>  
 </template>
 <script>

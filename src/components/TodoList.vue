@@ -6,6 +6,7 @@
       :item="item"
     ></TodoItem>
   </ul>
+  <button>Добавить дело</button>
 </template>
 
 <script>
