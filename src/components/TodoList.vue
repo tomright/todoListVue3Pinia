@@ -1,13 +1,12 @@
 <template>
-  <ul>
     <TodoItem
       v-for="(item, index) in todoStore.items"
       :key="item.id"
       :item="item"
       :index="index"
     ></TodoItem>
-  </ul>
-  <button>Добавить дело</button>
+<el-button type="success" size="default" @click="">Добавить дело</el-button>
+
 </template>
 
 <script>
@@ -24,4 +23,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style> 
+.el-button {
+margin-top: 10px;
+}
+</style>
