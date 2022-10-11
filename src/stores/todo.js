@@ -19,8 +19,8 @@ export const useTodoStore = defineStore("todo", {
     save() {
       console.log("TODO Saved");
     },
-    addNewTodo(todos) {
-      this.items.push(todos);
+    addNewTodo() {
+      this.items.push({ id: undefined, name: "", done: false });
     },
   },
 });

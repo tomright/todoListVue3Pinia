@@ -1,12 +1,13 @@
 <template>
-    <TodoItem
-      v-for="(item, index) in todoStore.items"
-      :key="item.id"
-      :item="item"
-      :index="index"
-    ></TodoItem>
-<el-button type="success" size="default" @click="">Добавить дело</el-button>
-
+  <TodoItem
+    v-for="(item, index) in todoStore.items"
+    :key="item.id"
+    :item="item"
+    :index="index"
+  ></TodoItem>
+  <el-button type="success" size="default" @click="addItem">
+    <el-icon class="el-icon--left"><Plus /></el-icon> Добавить дело
+  </el-button>
 </template>
 
 <script>
@@ -19,12 +20,17 @@ export default {
       todoStore: useTodoStore(),
     };
   },
+  methods: {
+    addItem() {
+      this.todoStore.addNewTodo();
+    },
+  },
   components: { TodoItem },
 };
 </script>
 
-<style> 
+<style>
 .el-button {
-margin-top: 10px;
+  margin-top: 10px;
 }
 </style>
