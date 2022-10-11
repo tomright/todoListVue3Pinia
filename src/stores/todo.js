@@ -22,5 +22,11 @@ export const useTodoStore = defineStore("todo", {
     addNewTodo() {
       this.items.push({ id: undefined, name: "", done: false });
     },
+    deleteItem(item) {
+      console.log("deleteItem", item);
+      console.log(typeof item);
+      this.items.splice(item, 1);
+      console.log(this.items.slice(item, 1));
+    },
   },
 });
