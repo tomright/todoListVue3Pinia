@@ -19,8 +19,19 @@ export const useTodoStore = defineStore("todo", {
     save() {
       console.log("TODO Saved");
     },
-    addNewTodo(todos) {
-      this.items.push(todos);
+    addNewTodo() {
+      //добавлено автоматическая генерация на стороне клиента id для каждого нового задания.
+      this.items.push({
+        id: this.items.length + 1,
+        name: "",
+        done: false,
+      });
+    },
+    deleteItem(item) {
+      console.log("deleteItem", item);
+      console.log(typeof item);
+      this.items.splice(item, 1);
+      console.log(this.items.slice(item, 1));
     },
   },
 });
