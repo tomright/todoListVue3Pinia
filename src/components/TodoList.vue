@@ -1,9 +1,10 @@
 <template>
   <ul>
     <TodoItem
-      v-for="item in todoStore.items"
+      v-for="(item, index) in todoStore.items"
       :key="item.id"
       :item="item"
+      :index="index"
     ></TodoItem>
   </ul>
   <button>Добавить дело</button>

@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-header>Header</el-header>
+    <el-header></el-header>
     <el-main>
       <RouterView></RouterView>
     </el-main>
