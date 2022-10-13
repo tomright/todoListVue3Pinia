@@ -28,9 +28,10 @@ export default {
   },
   methods: {
     addItem() {
-      this.todoStore.addNewTodo();
+      this.$router.push("/create/");
+      // this.todoStore.addNewTodo();
     },
-    delItem(event,event1) {
+    delItem(event, event1) {
       this.todoStore.deleteItem(event);
     },
   },

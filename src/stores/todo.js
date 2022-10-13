@@ -19,11 +19,11 @@ export const useTodoStore = defineStore("todo", {
     save() {
       console.log("TODO Saved");
     },
-    addNewTodo() {
+    addNewTodo(elem) {
       //добавлено автоматическая генерация на стороне клиента id для каждого нового задания.
       this.items.push({
         id: this.items.length + 1,
-        name: "",
+        name: elem,
         done: false,
       });
     },
