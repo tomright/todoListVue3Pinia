@@ -18,9 +18,16 @@ export const useUserStore = defineStore("user", {
       );
       this.token = respons.data.token;
     },
-    register() {
+    async register(username, password) {
       // TODO: реализовать метод регистрации пользователей.
-      throw Error("Not implemented");
+      // throw Error("Not implemented");
+      const regRespons = await axios.post(
+        "http://demo.telminov.ru:8082/user/register/",
+        {
+          username,
+          password,
+        }
+      );
     },
   },
 });
