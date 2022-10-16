@@ -1,14 +1,37 @@
 <template>
-  <div class="login-page">
-    <div class="form">
-      <form class="login-form">
-        <input v-model="usern" type="text" placeholder="логин" />
-        <input v-model="pass" type="password" placeholder="пароль" />
-        <el-button type="success" size="default" @click="registration"
-          >Регистрация</el-button
+  <div class="form">
+    <el-form
+      :model="formData"
+      ref="form"
+      label-width="150px"
+      @keyup.enter="registration"
+    >
+      <el-form-item
+        label="Имя пользователя"
+        :rules="{ required: true, message: 'Это поле обязательно' }"
+        prop="username"
+      >
+        <el-input v-model="formData.username" placeholder="Логин" />
+      </el-form-item>
+      <el-form-item
+        label="Пароль"
+        prop="pass"
+        :rules="{ required: true, message: 'Это поле обязательно' }"
+      >
+        <el-input
+          v-model="formData.pass"
+          placeholder="Пароль"
+          type="password"
+          prop="pass"
+        />
+      </el-form-item>
+
+      <el-form-item>
+        <el-button type="primary" @click="registration"
+          >Зарегистрироваться</el-button
         >
-      </form>
-    </div>
+      </el-form-item>
+    </el-form>
   </div>
   <RouterLink to="/">вернуться домой</RouterLink>
 </template>
@@ -20,8 +43,10 @@ export default {
   data() {
     return {
       userstore: useUserStore(),
-      usern: "",
-      pass: "",
+      formData: {
+        username: "",
+        pass: "",
+      },
     };
   },
   methods: {
