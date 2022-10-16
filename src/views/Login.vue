@@ -1,5 +1,14 @@
 <template>
   <div class="form">
+    <el-alert
+      :title="error"
+      v-if="error"
+      type="error"
+      effect="light"
+      show-icon
+      closable
+    ></el-alert>
+
     <el-form
       :model="formData"
       label-width="150px"
@@ -41,6 +50,7 @@ export default {
   name: "login",
   data() {
     return {
+      error: "",
       userstore: useUserStore(),
       formData: {
         username: "",
@@ -52,7 +62,15 @@ export default {
     async logined() {
       const isValid = await this.$refs.form.validate();
       if (!isValid) return;
-      this.userstore.login(this.formData.username, this.formData.pass);
+      const { isSuccess, result } = await this.userstore.login(
+        this.formData.username,
+        this.formData.pass
+      );
+      if (isSuccess) {
+        this.$router.push("/");
+      } else {
+        this.error = result;
+      }
     },
   },
   mounted() {

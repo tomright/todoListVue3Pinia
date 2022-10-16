@@ -1,5 +1,14 @@
 <template>
   <div class="form">
+    <el-alert
+      :title="errors"
+      type="errors"
+      v-if="errors"
+      effect="light"
+      show-icon
+      closable
+    ></el-alert>
+
     <el-form
       :model="formData"
       ref="form"
@@ -43,6 +52,7 @@ export default {
   data() {
     return {
       userstore: useUserStore(),
+      errors: "",
       formData: {
         username: "",
         pass: "",
@@ -50,14 +60,19 @@ export default {
     };
   },
   methods: {
-    registration() {
-      const isValid = this.$refs.form.validate();
+    async registration() {
+      const isValid = await this.$refs.form.validate();
       if (!isValid) return;
-      this.userstore.register(this.usern, this.pass);
+      const { isSuccess, result } = await this.userstore.register(
+        this.formData.username,
+        this.formData.pass
+      );
+      if (isSuccess) {
+        this.$router.push("/");
+      } else {
+        this.errors = result;
+      }
     },
-  },
-  mounted() {
-    this.userstore.login("user", "12345678");
   },
 };
 </script>

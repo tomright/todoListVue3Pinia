@@ -41,7 +41,7 @@ router.beforeEach(function (to, from, next) {
   document.title = to.meta.title || "Список дел";
   const userStore = useUserStore();
 
-  if (!userStore.token && to.name !== "login") {
+  if (!userStore.token && to.name !== "login" && to.name !== "reg") {
     next({ name: "login" });
   } else {
     next();
