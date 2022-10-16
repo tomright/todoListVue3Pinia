@@ -31,11 +31,11 @@ export default {
   methods: {
     logined() {
       this.userstore.login(this.userName, this.pass);
-      alert(this.userstore.token);
+      this.$router.push("/");
     },
   },
   mounted() {
-    this.userstore.login("user", "12345678");
+    // this.userstore.login("user", "12345678");
   },
 };
 </script>
