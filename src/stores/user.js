@@ -4,8 +4,16 @@ import axios from "axios";
 export const useUserStore = defineStore("user", {
   state() {
     return {
-      token: undefined,
+      _token: undefined,
     };
+  },
+  getters: {
+    token(state) {
+      if (!state._token) {
+        state._token = localStorage.getItem("token");
+      }
+      return state._token;
+    },
   },
   actions: {
     async login(username, password) {
@@ -15,7 +23,8 @@ export const useUserStore = defineStore("user", {
           username,
           password,
         });
-        this.token = response.data.token;
+        this._token = response.data.token;
+        localStorage.setItem("token", this._token);
       } catch (error) {
         response = error.response;
       }
@@ -39,7 +48,8 @@ export const useUserStore = defineStore("user", {
           username,
           password,
         });
-        this.token = regRespons.data.token;
+        this._token = regRespons.data.token;
+        localStorage.setItem("token", this._token);
       } catch (error) {
         regRespons = error.response;
       }
