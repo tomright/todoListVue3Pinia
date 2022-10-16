@@ -31,7 +31,6 @@ export default {
   methods: {
     logined() {
       this.userstore.login(this.userName, this.pass);
-      this.$router.push("/");
     },
   },
   mounted() {

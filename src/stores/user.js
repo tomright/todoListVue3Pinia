@@ -9,13 +9,10 @@ export const useUserStore = defineStore("user", {
   },
   actions: {
     async login(username, password) {
-      const respons = await axios.post(
-        "http://demo.telminov.ru:8082/user/login/",
-        {
-          username,
-          password,
-        }
-      );
+      const respons = await this.$axios.post("/user/login/", {
+        username,
+        password,
+      });
       this.token = respons.data.token;
     },
     async register(username, password) {
