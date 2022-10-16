@@ -50,6 +50,8 @@ export default {
   },
   methods: {
     async logined() {
+      const isValid = await this.$refs.form.validate();
+      if (!isValid) return;
       this.userstore.login(this.formData.username, this.formData.pass);
     },
   },

@@ -51,8 +51,9 @@ export default {
   },
   methods: {
     registration() {
+      const isValid = this.$refs.form.validate();
+      if (!isValid) return;
       this.userstore.register(this.usern, this.pass);
-      console.log(this.userstore.test.data);
     },
   },
   mounted() {
