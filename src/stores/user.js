@@ -64,5 +64,8 @@ export const useUserStore = defineStore("user", {
       }
       return { isSuccess, result };
     },
+    logOut() {
+      this._token = undefined;
+    },
   },
 });

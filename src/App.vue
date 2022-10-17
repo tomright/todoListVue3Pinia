@@ -2,7 +2,13 @@
   <el-container>
     <el-header>
       <el-row :gutter="20" justify="end">
-        <el-col :span="2" :offset="0">
+        <el-col v-if="userStrore._token" :span="2" :offset="0">
+          <el-button type="danger" size="default" @click="logOut"
+            >Выход</el-button
+          >
+        </el-col>
+
+        <el-col v-if="!userStrore._token" :span="2" :offset="0">
           <el-button type="primary" size="default" @click="authorization">
             Войти
           </el-button>
@@ -25,13 +31,24 @@
   </el-container>
 </template>
 <script>
+import { useUserStore } from "./stores/user";
 export default {
+  data() {
+    return {
+      userStrore: useUserStore(),
+    };
+  },
   methods: {
     authorization() {
       this.$router.push("/login");
     },
     registration() {
       this.$router.push("/reg");
+    },
+    logOut() {
+      localStorage.removeItem("token");
+      this.userStrore.logOut();
+      this.$router.push("/login");
     },
   },
 };
