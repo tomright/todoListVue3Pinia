@@ -58,7 +58,7 @@ export const useUserStore = defineStore("user", {
       if (regRespons.status === 201) {
         isSuccess = true;
       } else if (regRespons.status === 400) {
-        result = regRespons.data.non_field_errors.join(". ");
+        result = regRespons.data
       } else {
         result = "Ошибка сервера";
       }

@@ -2,7 +2,7 @@
   <div class="form">
     <el-alert
       :title="errors"
-      type="errors"
+      type="error"
       v-if="errors"
       effect="light"
       show-icon
@@ -16,6 +16,13 @@
       @keyup.enter="registration"
       v-loading="isLoading"
     >
+      <el-alert
+        :title="errorsUsername"
+        type="error"
+        v-if="errorsUsername"
+        effect="light"
+        show-icon
+      ></el-alert>
       <el-form-item
         label="Имя пользователя"
         :rules="{ required: true, message: 'Это поле обязательно' }"
@@ -36,6 +43,13 @@
         />
       </el-form-item>
 
+      <el-alert
+        :title="errorsPassword"
+        type="error"
+        v-if="errorsPassword"
+        effect="light"
+        show-icon
+      ></el-alert>
       <el-form-item>
         <el-button type="primary" @click="registration"
           >Зарегистрироваться</el-button
@@ -54,6 +68,8 @@ export default {
     return {
       userstore: useUserStore(),
       errors: "",
+      errorsUsername: "",
+      errorsPassword: "",
       formData: {
         username: "",
         pass: "",
@@ -63,6 +79,9 @@ export default {
   },
   methods: {
     async registration() {
+      this.errors = undefined;
+      this.errorsUsername = undefined;
+      this.errorsPassword = undefined;
       const isValid = await this.$refs.form.validate();
       if (!isValid) return;
       this.isLoading = true;
@@ -74,7 +93,12 @@ export default {
       if (isSuccess) {
         this.$router.push("/");
       } else {
-        this.errors = result;
+        if (result.username || result.password) {
+          this.errorsUsername = result.username.join(". ");
+          this.errorsPassword = result.password.join(". ");
+        } else {
+          this.errors = result.join(". ");
+        }
       }
     },
   },
