@@ -35,6 +35,9 @@ export default {
       this.todoStore.deleteItem(event);
     },
   },
+  mounted() {
+    this.todoStore.loadTodo();
+  },
   components: { TodoItem },
 };
 </script>
