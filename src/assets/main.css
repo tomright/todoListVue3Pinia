@@ -4,6 +4,8 @@ body,
 .el-container,
 .el-main {
   height: 100%;
+  width: 1280px;
+  margin: auto;
 }
 
 body {
