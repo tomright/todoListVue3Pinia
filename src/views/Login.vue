@@ -14,6 +14,7 @@
       label-width="150px"
       ref="form"
       @keyup.enter="logined"
+      v-loading="isLoading"
     >
       <el-form-item
         label="Имя пользователя"
@@ -41,7 +42,7 @@
     </el-form>
   </div>
 
-  <RouterLink to="/">вернуться домой</RouterLink>
+  <!-- <RouterLink to="/">вернуться домой</RouterLink> -->
 </template>
 
 <script>
@@ -56,16 +57,19 @@ export default {
         username: "",
         pass: "",
       },
+      isLoading: false,
     };
   },
   methods: {
     async logined() {
       const isValid = await this.$refs.form.validate();
       if (!isValid) return;
+      this.isLoading = true;
       const { isSuccess, result } = await this.userstore.login(
         this.formData.username,
         this.formData.pass
       );
+      this.isLoading = false;
       if (isSuccess) {
         this.$router.push("/");
       } else {
@@ -83,7 +87,6 @@ export default {
 .form {
   position: relative;
   z-index: 1;
-  background: #ffffff;
   max-width: 360px;
   margin: 0 auto;
   padding: 45px;
