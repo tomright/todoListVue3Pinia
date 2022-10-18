@@ -1,12 +1,12 @@
 <template>
   <el-row :gutter="10">
     <el-col :span="1">
-      <el-tag size="large" style="height: 100%; font-size: large;">
+      <el-tag size="large" style="height: 100%; font-size: large">
         {{ index + 1 }}
       </el-tag>
     </el-col>
     <el-col :span="17">
-      <p>{{ item.name }}</p>
+      <p>{{ itemCut() }}</p>
     </el-col>
     <el-col :span="1.1">
       <el-checkbox v-model="item.done" label="Сделано" style="height: 100%" />
@@ -45,6 +45,13 @@ export default {
     },
     goToEdit() {
       this.$router.push(`/edit/${this.index}`);
+    },
+    itemCut() {
+      if (String(this.item.name.lenght) < 58) {
+        return this.item.name;
+      } else {
+        return String(this.item.name).slice(0, 58) + "...";
+      }
     },
   },
 };
