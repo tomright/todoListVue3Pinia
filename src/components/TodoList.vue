@@ -37,6 +37,7 @@ export default {
   },
   mounted() {
     this.todoStore.loadTodo();
+    console.log("Получаем данные с сервера");
   },
   components: { TodoItem },
 };

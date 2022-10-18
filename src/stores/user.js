@@ -40,8 +40,6 @@ export const useUserStore = defineStore("user", {
       return { isSuccess, result };
     },
     async register(username, password) {
-      // TODO: реализовать метод регистрации пользователей.
-      // throw Error("Not implemented");
       let regRespons;
       try {
         regRespons = await this.$axios.post("/user/register/", {
