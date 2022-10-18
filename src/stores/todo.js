@@ -13,10 +13,6 @@ export const useTodoStore = defineStore("todo", {
     },
   },
   actions: {
-    async loadTodo() {
-      const response = await this.$axios.get("/items/");
-      this.item = response.data;
-    },
     save() {
       console.log("TODO Saved");
     },
