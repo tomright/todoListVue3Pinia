@@ -93,8 +93,9 @@ export default {
       if (isSuccess) {
         this.$router.push("/");
       } else {
-        if (result.username || result.password) {
+        if (result.username) {
           this.errorsUsername = result.username.join(". ");
+        } else if (result.password) {
           this.errorsPassword = result.password.join(". ");
         } else {
           this.errors = result.join(". ");

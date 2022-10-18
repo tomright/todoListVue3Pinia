@@ -14,39 +14,28 @@ export function axiosPiniaPlugin(context) {
   }
 
   context.store.$axios = instance;
-  context.store.makeRequest = async ({
-    method: string = "get",
-    url,
-    params,
-    data,
-  }) => {
+  context.store.makeRequest = async ({ method = "get", url, params, data }) => {
     let response;
     try {
       response = await instance({ method, url, params, data });
+      userStore._token = response.data.token;
     } catch (error) {
       response = error.response;
     }
-    let result = response.data;
-    let isSuccess = response.status < 300;
-
-    //отчет сформировался
-    if (isSuccess) {
-      return { isSuccess, result };
-    }
-
-    //ошибка валидации
-    if (response.status === 400) {
-      return { isSuccess, result };
-    }
-
-    //ошибка сервера
-    if (response.status === 500) {
-      return {
-        isSuccess,
-        result: {
-          
-        }
+    localStorage.setItem("token", userStore.token);
+    let isSuccess = false;
+    let result = "";
+    if (response.status === 200 || response.status === 201) {
+      isSuccess = true;
+    } else if (response.status === 400) {
+      if (response.data.non_field_errors) {
+        result = response.data.non_field_errors.join(". ");
+      } else {
+        result = response.data;
       }
+    } else {
+      result = "Ошибка сервера";
     }
+    return { isSuccess, result };
   };
 }
