@@ -3,10 +3,7 @@ import { defineStore } from "pinia";
 export const useTodoStore = defineStore("todo", {
   state() {
     return {
-      items: [
-        { id: 1, name: "Купить хлеба", done: true },
-        { id: 2, name: "Купить молоко", done: false },
-      ],
+      items: [],
     };
   },
   getters: {
@@ -16,6 +13,10 @@ export const useTodoStore = defineStore("todo", {
     },
   },
   actions: {
+    async loadTodo() {
+      const response = await this.$axios.get("/items/");
+      this.item = response.data;
+    },
     save() {
       console.log("TODO Saved");
     },
