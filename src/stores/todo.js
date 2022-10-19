@@ -18,9 +18,13 @@ export const useTodoStore = defineStore("todo", {
     },
     save(text) {
       console.log("TODO Saved", text);
-      const url = '/items/'
-      const method = 'post'
-      const data = {name: text}
+      let url = "/items/";
+      let method = "post";
+      let data = {name: text.name};
+      if (text.id) {
+        url += `${text.id}/`;
+        method = "put";
+      }
       this.makeRequest({ method, url, data });
     },
     addNewTodo(elem) {
