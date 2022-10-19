@@ -47,7 +47,7 @@ export default {
       this.$router.push(`/edit/${this.index}`);
     },
     itemCut() {
-      if (String(this.item.name.lenght) < 58) {
+      if (String(this.item.name.length) < 58) {
         return this.item.name;
       } else {
         return String(this.item.name).slice(0, 58) + "...";
