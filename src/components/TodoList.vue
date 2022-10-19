@@ -36,6 +36,9 @@ export default {
     },
   },
   components: { TodoItem },
+  mounted() {
+    this.todoStore.load();
+  },
 };
 </script>
 
