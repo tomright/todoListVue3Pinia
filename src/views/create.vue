@@ -3,7 +3,14 @@
     <h1>Страница создания</h1>
     <el-row :gutter="20">
       <el-col>
-        <el-input v-model="todoText" type="textarea"></el-input>
+        <el-input
+          v-model="todoText"
+          rows="6"
+          ref="text"
+          type="textarea"
+          @input="valid"
+        ></el-input>
+        <el-alert v-if="errorValidate" :title="errorValidate" type="error" />
       </el-col>
     </el-row>
     <el-row :gutter="20">
@@ -28,16 +35,27 @@ export default {
     return {
       todoStore: useTodoStore(),
       todoText: "",
+      errorValidate: "",
     };
   },
   props: ["id"],
   methods: {
-    save() {
-      this.todoStore.addNewTodo(this.todoText);
-      this.$router.push("/");
+    async save() {
+      this.todoText = this.todoText.trim();
+      if (this.todoText.length > 0) {
+        this.todoStore.save(this.todoText);
+        this.$router.push("/");
+      } else {
+        this.errorValidate = "Текст дела, не должен быть пустым!";
+      }
     },
     goHome() {
       this.$router.push("/");
+    },
+    valid(e) {
+      if (e.length > 0) {
+        this.errorValidate = "";
+      }
     },
   },
 };

@@ -16,8 +16,12 @@ export const useTodoStore = defineStore("todo", {
       const { isSucsess, result } = await this.makeRequest({ url: "/items/" });
       this.items = result;
     },
-    save() {
-      console.log("TODO Saved");
+    save(text) {
+      console.log("TODO Saved", text);
+      const url = '/items/'
+      const method = 'post'
+      const data = {name: text}
+      this.makeRequest({ method, url, data });
     },
     addNewTodo(elem) {
       //добавлено автоматическая генерация на стороне клиента id для каждого нового задания.
