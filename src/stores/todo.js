@@ -8,14 +8,13 @@ export const useTodoStore = defineStore("todo", {
   },
   getters: {
     getItem(state) {
-      console.log(state);
       return state.items;
     },
   },
   actions: {
     async load() {
-      const response = await this.$axios.get("/items/");
-      this.items = response.data;
+      const { isSucsess, result } = await this.makeRequest({ url: "/items/" });
+      this.items = result;
     },
     save() {
       console.log("TODO Saved");
@@ -29,10 +28,7 @@ export const useTodoStore = defineStore("todo", {
       });
     },
     deleteItem(item) {
-      console.log("deleteItem", item);
-      console.log(typeof item);
       this.items.splice(item, 1);
-      console.log(this.items.slice(item, 1));
     },
   },
 });

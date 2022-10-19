@@ -32,6 +32,7 @@
 </template>
 <script>
 import { useUserStore } from "./stores/user";
+import { useTodoStore } from "./stores/todo";
 export default {
   data() {
     return {
@@ -46,9 +47,9 @@ export default {
       this.$router.push("/reg");
     },
     logOut() {
-      localStorage.removeItem("token");
       this.userStore.logOut();
       this.$router.push("/login");
+      useTodoStore().items = [];
     },
   },
 };

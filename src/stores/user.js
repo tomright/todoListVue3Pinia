@@ -34,6 +34,7 @@ export const useUserStore = defineStore("user", {
     },
     logOut() {
       this._token = undefined;
+      localStorage.removeItem("token");
     },
   },
 });
