@@ -59,10 +59,14 @@ export default {
   methods: {
     save() {
       this.todoStore.save(this.todoStore.items[this.id]);
+      this.doneItem();
       this.$router.push("/");
     },
     goHome() {
       this.$router.push("/");
+    },
+    doneItem() {
+      this.todoStore.done(this.todoStore.items[this.id]);
     },
   },
   mounted() {

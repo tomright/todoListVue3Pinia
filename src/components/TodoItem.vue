@@ -69,7 +69,7 @@ export default {
         return String(this.item.name).slice(0, 58) + "...";
       }
     },
-    doneItem(event) {
+    doneItem() {
       this.$emit("doneItem", this.item);
     },
   },
