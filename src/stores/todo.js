@@ -25,6 +25,7 @@ export const useTodoStore = defineStore("todo", {
         method = "put";
       }
       await this.makeRequest({ method, url, data });
+      this.load();
     },
     addNewTodo(elem) {
       //добавлено автоматическая генерация на стороне клиента id для каждого нового задания.
@@ -42,6 +43,7 @@ export const useTodoStore = defineStore("todo", {
       if (isSuccess) {
         this.items.splice(this.items.indexOf(item), 1);
       }
+      this.load();
     },
   },
 });
