@@ -14,21 +14,26 @@
 
     <el-col :span="1.1">
       <el-button-group>
-        <el-button
-          type="warning"
-          size="small"
-          @click="delTodoItem"
-          style="height: 100%"
+        <el-popconfirm
+          confirm-button-text="Да"
+          cancel-button-text="Нет"
+          title="Удалить?"
+          @confirm="delTodoItem"
         >
-          Удалить
-        </el-button>
+          <template #reference>
+            <el-button type="warning" size="small" style="height: 100%">
+              <!-- @click="delTodoItem" -->
+              Удалить
+            </el-button>
+          </template>
+        </el-popconfirm>
         <el-button
           type="info"
           size="small"
           @click="goToEdit"
           style="height: 100%"
-          >Редактировать</el-button
-        >
+          >Редактировать
+        </el-button>
       </el-button-group>
     </el-col>
   </el-row>
@@ -41,7 +46,7 @@ export default {
   emits: ["delTodoItem"],
   methods: {
     delTodoItem() {
-      this.$emit("delTodoItem", this.index);
+      this.$emit("delTodoItem", this.item);
     },
     goToEdit() {
       this.$router.push(`/edit/${this.index}`);

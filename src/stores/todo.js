@@ -16,16 +16,15 @@ export const useTodoStore = defineStore("todo", {
       const { isSucsess, result } = await this.makeRequest({ url: "/items/" });
       this.items = result;
     },
-    save(text) {
-      console.log("TODO Saved", text);
+    async save(text) {
       let url = "/items/";
       let method = "post";
-      let data = {name: text.name};
+      let data = { name: text.name };
       if (text.id) {
         url += `${text.id}/`;
         method = "put";
       }
-      this.makeRequest({ method, url, data });
+      await this.makeRequest({ method, url, data });
     },
     addNewTodo(elem) {
       //добавлено автоматическая генерация на стороне клиента id для каждого нового задания.
@@ -35,8 +34,14 @@ export const useTodoStore = defineStore("todo", {
         done: false,
       });
     },
-    deleteItem(item) {
-      this.items.splice(item, 1);
+    async deleteItem(item) {
+      let { isSuccess, result } = await this.makeRequest({
+        method: "delete",
+        url: `/items/${item.id}/`,
+      });
+      if (isSuccess) {
+        this.items.splice(this.items.indexOf(item), 1);
+      }
     },
   },
 });
