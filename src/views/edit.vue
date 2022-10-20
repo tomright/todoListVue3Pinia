@@ -11,6 +11,20 @@
       </el-col>
     </el-row>
     <el-row :gutter="20">
+      <el-col :span="12" :offset="0" style="margin-bottom: 10px"
+        >Описание задачи (если требуется):</el-col
+      >
+      <el-col>
+        <el-input
+          v-model="todoStore.items[id].description"
+          rows="6"
+          type="textarea"
+          @input="valid"
+          class="borderInput"
+        ></el-input>
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
       <el-col :span="2.4" :offset="0">
         <el-button type="success" size="default" @click="save"
           >Сохранить</el-button
@@ -44,10 +58,7 @@ export default {
   props: ["id"],
   methods: {
     save() {
-      this.todoStore.save({
-        name: this.todoStore.items[this.id].name,
-        id: this.todoStore.items[this.id].id,
-      });
+      this.todoStore.save(this.todoStore.items[this.id]);
       this.$router.push("/");
     },
     goHome() {
