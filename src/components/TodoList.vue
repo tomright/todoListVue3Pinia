@@ -31,7 +31,7 @@ export default {
       this.$router.push("/create/");
       // this.todoStore.addNewTodo();
     },
-    delItem(event, event1) {
+    delItem(event) {
       this.todoStore.deleteItem(event);
     },
   },
