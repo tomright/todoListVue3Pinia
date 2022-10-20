@@ -28,7 +28,7 @@ export function axiosPiniaPlugin(context) {
     }
     let isSuccess = false;
     let result = "";
-    if (response.status === 200 || response.status === 201) {
+    if (response.status < 400) {
       isSuccess = true;
       result = response.data;
     } else if (response.status === 400) {
