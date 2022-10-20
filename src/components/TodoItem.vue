@@ -12,14 +12,15 @@
       >
         <div>{{ item.description }}</div>
       </el-collapse-item>
-      <!-- <p>{{ itemCut() }}</p> -->
     </el-col>
     <el-col :span="1.1">
       <el-checkbox
         v-model="item.done"
         label="Сделано"
-        style="height: 100%"
+        style="position: sticky; margin: auto"
         @change="doneItem"
+        size="large"
+        border
       />
     </el-col>
 
