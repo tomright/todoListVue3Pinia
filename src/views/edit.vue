@@ -3,7 +3,11 @@
     <h1>Страница редактирования</h1>
     <el-row :gutter="20">
       <el-col>
-        <el-input v-model="todoStore.items[id].name" type="textarea"></el-input>
+        <el-input
+          v-model="todoStore.items[id].name"
+          type="textarea"
+          ref="inputRef"
+        ></el-input>
       </el-col>
     </el-row>
     <el-row :gutter="20">
@@ -40,11 +44,18 @@ export default {
   props: ["id"],
   methods: {
     save() {
+      this.todoStore.save({
+        name: this.todoStore.items[this.id].name,
+        id: this.todoStore.items[this.id].id,
+      });
       this.$router.push("/");
     },
     goHome() {
       this.$router.push("/");
     },
+  },
+  mounted() {
+    this.$refs.inputRef.focus();
   },
 };
 </script>

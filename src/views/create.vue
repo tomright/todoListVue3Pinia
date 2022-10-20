@@ -6,7 +6,7 @@
         <el-input
           v-model="todoText"
           rows="6"
-          ref="text"
+          ref="inputRef"
           type="textarea"
           @input="valid"
         ></el-input>
@@ -43,7 +43,7 @@ export default {
     async save() {
       this.todoText = this.todoText.trim();
       if (this.todoText.length > 0) {
-        this.todoStore.save(this.todoText);
+        this.todoStore.save({ name: this.todoText });
         this.$router.push("/");
       } else {
         this.errorValidate = "Текст дела, не должен быть пустым!";
@@ -57,6 +57,9 @@ export default {
         this.errorValidate = "";
       }
     },
+  },
+  mounted() {
+    this.$refs.inputRef.focus();
   },
 };
 </script>
