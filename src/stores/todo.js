@@ -37,5 +37,16 @@ export const useTodoStore = defineStore("todo", {
       }
       this.load();
     },
+    async done(item) {
+      let url;
+      let method = "post";
+      if (item.done) {
+        url = `/items/${item.id}/set_done/`;
+      } else {
+        url = `/items/${item.id}/unset_done/`;
+      }
+      let { isSuccess, result } = await this.makeRequest({ method, url });
+      return { isSuccess, result };
+    },
   },
 });

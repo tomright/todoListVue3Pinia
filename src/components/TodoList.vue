@@ -6,6 +6,7 @@
     :item="item"
     :index="index"
     @delTodoItem="delItem"
+    @doneItem="sendDone"
   ></TodoItem>
   <p v-else>
     Список дел пуст, можете добавить новое дело, нажав на соответствующую кнопку
@@ -29,10 +30,12 @@ export default {
   methods: {
     addItem() {
       this.$router.push("/create/");
-      // this.todoStore.addNewTodo();
     },
     delItem(event) {
       this.todoStore.deleteItem(event);
+    },
+    sendDone(item) {
+      this.todoStore.done(item);
     },
   },
   components: { TodoItem },

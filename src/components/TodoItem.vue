@@ -9,7 +9,12 @@
       <p>{{ itemCut() }}</p>
     </el-col>
     <el-col :span="1.1">
-      <el-checkbox v-model="item.done" label="Сделано" style="height: 100%" />
+      <el-checkbox
+        v-model="item.done"
+        label="Сделано"
+        style="height: 100%"
+        @change="doneItem"
+      />
     </el-col>
 
     <el-col :span="1.1">
@@ -43,7 +48,7 @@
 export default {
   name: "TodoItem",
   props: ["item", "index"],
-  emits: ["delTodoItem"],
+  emits: ["delTodoItem", "doneItem"],
   methods: {
     delTodoItem() {
       this.$emit("delTodoItem", this.item);
@@ -57,6 +62,9 @@ export default {
       } else {
         return String(this.item.name).slice(0, 58) + "...";
       }
+    },
+    doneItem(event) {
+      this.$emit("doneItem", this.item);
     },
   },
 };
