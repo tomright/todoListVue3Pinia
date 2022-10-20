@@ -1,4 +1,5 @@
 <template>
+  <el-collapse>
   <TodoItem
     v-if="todoStore.items.length > 0"
     v-for="(item, index) in todoStore.items"
@@ -12,6 +13,7 @@
     Список дел пуст, можете добавить новое дело, нажав на соответствующую кнопку
     :)
   </p>
+</el-collapse>
   <el-button type="success" size="default" @click="addItem">
     <el-icon class="el-icon--left"><Plus /></el-icon> Добавить дело
   </el-button>

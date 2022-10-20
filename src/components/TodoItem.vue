@@ -6,7 +6,13 @@
       </el-tag>
     </el-col>
     <el-col :span="17">
-      <p>{{ itemCut() }}</p>
+      <el-collapse-item
+        style="border-bottom: 1px solid green"
+        :title="itemCut()"
+      >
+        <div>{{ item.description }}</div>
+      </el-collapse-item>
+      <!-- <p>{{ itemCut() }}</p> -->
     </el-col>
     <el-col :span="1.1">
       <el-checkbox
