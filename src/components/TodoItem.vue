@@ -1,11 +1,11 @@
 <template>
-  <el-row :gutter="10">
+  <el-row :gutter="3">
     <el-col :span="1">
       <el-tag size="large" style="height: 100%; font-size: large">
         {{ index + 1 }}
       </el-tag>
     </el-col>
-    <el-col :span="17">
+    <el-col :span="16">
       <el-collapse-item
         style="border-bottom: 1px solid green"
         :title="itemCut()"
