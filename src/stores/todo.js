@@ -19,7 +19,7 @@ export const useTodoStore = defineStore("todo", {
     async save(text) {
       let url = "/items/";
       let method = "post";
-      let data = { name: text.name };
+      let data = text;
       if (text.id) {
         url += `${text.id}/`;
         method = "put";
