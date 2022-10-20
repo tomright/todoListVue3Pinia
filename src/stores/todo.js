@@ -27,14 +27,6 @@ export const useTodoStore = defineStore("todo", {
       await this.makeRequest({ method, url, data });
       this.load();
     },
-    addNewTodo(elem) {
-      //добавлено автоматическая генерация на стороне клиента id для каждого нового задания.
-      this.items.push({
-        id: this.items.length + 1,
-        name: elem,
-        done: false,
-      });
-    },
     async deleteItem(item) {
       let { isSuccess, result } = await this.makeRequest({
         method: "delete",
