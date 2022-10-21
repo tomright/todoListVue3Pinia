@@ -3,7 +3,25 @@
     <h1>Страница редактирования</h1>
     <el-row :gutter="20">
       <el-col>
-        <el-input v-model="todoStore.items[id].name" type="textarea"></el-input>
+        <el-input
+          v-model="todoStore.items[id].name"
+          type="textarea"
+          ref="inputRef"
+        ></el-input>
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :span="12" :offset="0" style="margin-bottom: 10px"
+        >Описание задачи (если требуется):</el-col
+      >
+      <el-col>
+        <el-input
+          v-model="todoStore.items[id].description"
+          rows="6"
+          type="textarea"
+          @input="valid"
+          class="borderInput"
+        ></el-input>
       </el-col>
     </el-row>
     <el-row :gutter="20">
@@ -40,11 +58,19 @@ export default {
   props: ["id"],
   methods: {
     save() {
+      this.todoStore.save(this.todoStore.items[this.id]);
+      this.doneItem();
       this.$router.push("/");
     },
     goHome() {
       this.$router.push("/");
     },
+    doneItem() {
+      this.todoStore.done(this.todoStore.items[this.id]);
+    },
+  },
+  mounted() {
+    this.$refs.inputRef.focus();
   },
 };
 </script>

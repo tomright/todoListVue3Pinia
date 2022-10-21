@@ -8,31 +8,45 @@ export const useTodoStore = defineStore("todo", {
   },
   getters: {
     getItem(state) {
-      console.log(state);
       return state.items;
     },
   },
   actions: {
-    async loadTodo() {
-      const response = await this.$axios.get("/items/");
-      this.item = response.data;
+    async load() {
+      const { isSucsess, result } = await this.makeRequest({ url: "/items/" });
+      this.items = result;
     },
-    save() {
-      console.log("TODO Saved");
+    async save(text) {
+      let url = "/items/";
+      let method = "post";
+      let data = text;
+      if (text.id) {
+        url += `${text.id}/`;
+        method = "put";
+      }
+      await this.makeRequest({ method, url, data });
+      this.load();
     },
-    addNewTodo(elem) {
-      //добавлено автоматическая генерация на стороне клиента id для каждого нового задания.
-      this.items.push({
-        id: this.items.length + 1,
-        name: elem,
-        done: false,
+    async deleteItem(item) {
+      let { isSuccess, result } = await this.makeRequest({
+        method: "delete",
+        url: `/items/${item.id}/`,
       });
+      if (isSuccess) {
+        this.items.splice(this.items.indexOf(item), 1);
+      }
+      this.load();
     },
-    deleteItem(item) {
-      console.log("deleteItem", item);
-      console.log(typeof item);
-      this.items.splice(item, 1);
-      console.log(this.items.slice(item, 1));
+    async done(item) {
+      let url;
+      let method = "post";
+      if (item.done) {
+        url = `/items/${item.id}/set_done/`;
+      } else {
+        url = `/items/${item.id}/unset_done/`;
+      }
+      let { isSuccess, result } = await this.makeRequest({ method, url });
+      return { isSuccess, result };
     },
   },
 });

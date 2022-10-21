@@ -1,4 +1,5 @@
 <template>
+  <el-collapse>
   <TodoItem
     v-if="todoStore.items.length > 0"
     v-for="(item, index) in todoStore.items"
@@ -6,11 +7,13 @@
     :item="item"
     :index="index"
     @delTodoItem="delItem"
+    @doneItem="sendDone"
   ></TodoItem>
   <p v-else>
     Список дел пуст, можете добавить новое дело, нажав на соответствующую кнопку
     :)
   </p>
+</el-collapse>
   <el-button type="success" size="default" @click="addItem">
     <el-icon class="el-icon--left"><Plus /></el-icon> Добавить дело
   </el-button>
@@ -29,16 +32,18 @@ export default {
   methods: {
     addItem() {
       this.$router.push("/create/");
-      // this.todoStore.addNewTodo();
     },
-    delItem(event, event1) {
+    delItem(event) {
       this.todoStore.deleteItem(event);
     },
-  },
-  mounted() {
-    this.todoStore.loadTodo();
+    sendDone(item) {
+      this.todoStore.done(item);
+    },
   },
   components: { TodoItem },
+  mounted() {
+    this.todoStore.load();
+  },
 };
 </script>
 
